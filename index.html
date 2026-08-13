@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Monthiversary 💜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Thai:wght@400;600;700&family=Noto+Sans+Lao:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ตัวนับเวลาคบกัน (แสดงทุกหน้า) -->
+  <div id="counter-bar">
+    <div class="counter-title" data-i18n="counterTitle">ຮັກກັນມາແລ້ວ</div>
+    <div class="counter-value" id="counter-value">...</div>
+  </div>
+
+  <!-- ปุ่ม Hamburger -->
+  <div id="hamburger-btn"><span></span></div>
+
+  <!-- แผงเมนู -->
+  <div id="menu-panel">
+    <div class="panel-box">
+      <button id="menu-close">✕</button>
+      <h3 data-i18n="menuTitle">ເມນູ</h3>
+      <div class="menu-link" data-goto="page-letter" data-i18n="menuLetterPage">ໜ້າຈົດໝາຍ</div>
+      <div class="menu-link" data-goto="page-album" data-i18n="menuAlbumPage">ໜ້າຮູບພາບ</div>
+      <h3 style="margin-top:14px;" data-i18n="menuLanguage">ພາສາ</h3>
+      <div class="lang-row">
+        <button class="lang-btn" data-lang="la">ລາວ</button>
+        <button class="lang-btn" data-lang="th">ไทย</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== หน้า 1: Welcome ===================== -->
+  <section class="page active" id="page-welcome">
+    <div id="tap-hint" data-i18n="tapToContinue">ແຕະ 3 ຄັ້ງ</div>
+    <div id="welcome-popup">
+      <img src="images/popup-monthiversary.png" alt="1 Monthiversary">
+    </div>
+  </section>
+
+  <!-- ===================== หน้า 2: ปุ่มเค้ก ===================== -->
+  <section class="page" id="page-cake">
+    <div id="cake-btn">
+      <img src="images/btn-cake.png" alt="เปิดจดหมาย">
+    </div>
+  </section>
+
+  <!-- ===================== หน้า 3: จดหมาย ===================== -->
+  <section class="page" id="page-letter">
+    <div id="letter-content"></div>
+    <div id="letter-next">
+      <span data-i18n="nextPage">ໜ້າຖັດໄປ</span><span class="arrow">→</span>
+    </div>
+  </section>
+
+  <!-- ===================== หน้า 4: อัลบั้ม ===================== -->
+  <section class="page" id="page-album">
+    <div id="album-scroll">
+      <div id="masonry"></div>
+    </div>
+    <div id="album-next"><span data-i18n="nextButton">ຕໍ່ໄປ</span></div>
+  </section>
+
+  <!-- Modal รูปขยาย -->
+  <div id="image-modal">
+    <div class="modal-box">
+      <img id="modal-img" src="" alt="">
+      <div class="modal-caption" id="modal-caption"></div>
+      <div class="modal-actions">
+        <button class="btn-save" id="modal-save" data-i18n="saveImage">ບັນທຶກຮູບ</button>
+        <button class="btn-close" id="modal-close" data-i18n="closeButton">ປິດ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== หน้า 5: ปิดท้าย ===================== -->
+  <section class="page" id="page-end">
+    <div id="end-content"></div>
+    <div id="end-home" data-i18n="homeButton">ໜ້າຫຼັກ</div>
+  </section>
+
+  <!-- เพลงประกอบ: วางไฟล์เพลงชื่อ song.mp3 ไว้ในโฟลเดอร์ music/ -->
+  <audio id="bgm" src="music/song.mp3" loop preload="auto"></audio>
+
+  <!-- เตือนเมื่อหมุนจอแนวนอน -->
+  <div id="rotate-overlay">📱 กรุณาหมุนมือถือกลับเป็นแนวตั้ง</div>
+
+</div>
+
+<script src="js/translations.js"></script>
+<script src="js/content-data.js"></script>
+<script src="js/album-data.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

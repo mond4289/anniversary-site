@@ -1,0 +1,326 @@
+/* =====================================================================
+   style.css — ธีมสีม่วงพาสเทลทั้งเว็บ
+   จุดที่ "แก้สีได้ง่าย" ทั้งหมดอยู่ใน :root ด้านล่างนี้
+   ===================================================================== */
+
+:root{
+  /* ---------- โทนสีม่วงพาสเทลหลักของเว็บ (แก้ตรงนี้ได้เลย) ---------- */
+  --lavender-50:  #F7F1FC;   /* พื้นหลังอ่อนสุด */
+  --lavender-100: #ECDFF7;   /* การ์ด / กล่องเนื้อหา */
+  --lavender-300: #CDA8EA;   /* เส้นขอบ / รายละเอียด */
+  --lavender-500: #A375D6;   /* ปุ่มหลัก / ไฮไลต์ */
+  --lavender-700: #6E4A97;   /* ข้อความเข้ม / หัวข้อ */
+  --plum-900:     #4A3266;   /* ข้อความเข้มสุด */
+  --pink-soft:    #F5C4D6;   /* หัวใจสีชมพู */
+  --blue-pastel:  #BFE3F6;   /* หัวใจสีฟ้าพาสเทล */
+  --white-soft:   #FFFDFB;   /* หัวใจสีขาว */
+  --gold-accent:  #E9C46A;   /* จุดเน้นเล็กๆ (ประกาย) */
+
+  --shadow-soft: 0 8px 30px rgba(110, 74, 151, 0.25);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html,body{
+  height:100%;
+  overflow:hidden;
+  background:var(--plum-900);
+  font-family:'Poppins','Noto Sans Thai','Noto Sans Lao',sans-serif;
+  color:var(--plum-900);
+  -webkit-tap-highlight-color: transparent;
+  user-select:none;
+}
+
+#app{
+  position:relative;
+  width:100%;
+  max-width:480px;      /* บังคับให้ดูเหมือนแนวตั้งมือถือแม้เปิดจอใหญ่ */
+  height:100dvh;
+  margin:0 auto;
+  overflow:hidden;
+  background:var(--lavender-50);
+  box-shadow: 0 0 60px rgba(0,0,0,0.35);
+}
+
+/* ---------- ระบบหน้า (page routing) ---------- */
+.page{
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity .5s ease;
+  overflow:hidden;
+}
+.page.active{ display:flex; opacity:1; }
+
+#page-welcome, #page-cake, #page-end{ background-image:url('../images/bg-couple.jpg'); }
+#page-letter{ background-image:url('../images/bg-letter.png'); }
+#page-album{ background-image:url('../images/bg-album.png'); }
+
+/* ---------- ตัวนับเวลาคบกัน (แสดงทุกหน้า ด้านบน) ---------- */
+#counter-bar{
+  position:absolute;
+  top:14px; left:50%;
+  transform:translateX(-50%);
+  z-index:60;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(6px);
+  border:1px solid var(--lavender-300);
+  border-radius:999px;
+  padding:8px 18px;
+  font-size:12px;
+  color:var(--lavender-700);
+  text-align:center;
+  box-shadow:var(--shadow-soft);
+  white-space:nowrap;
+}
+#counter-bar .counter-title{ font-size:10px; opacity:.75; margin-bottom:2px; }
+#counter-bar .counter-value{ font-weight:600; letter-spacing:.3px; }
+
+/* ---------- Hamburger menu ---------- */
+#hamburger-btn{
+  position:absolute;
+  top:14px; right:14px;
+  z-index:70;
+  width:42px; height:42px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.8);
+  border:1px solid var(--lavender-300);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  box-shadow:var(--shadow-soft);
+}
+#hamburger-btn span, #hamburger-btn::before, #hamburger-btn::after{
+  content:''; display:block; width:18px; height:2px;
+  background:var(--lavender-700); border-radius:2px;
+  position:relative;
+}
+#hamburger-btn{ flex-direction:column; gap:4px; }
+
+#menu-panel{
+  position:absolute; inset:0;
+  z-index:80;
+  background:rgba(74,50,102,0.55);
+  backdrop-filter:blur(3px);
+  display:none;
+  align-items:flex-start; justify-content:flex-end;
+}
+#menu-panel.open{ display:flex; }
+#menu-panel .panel-box{
+  width:72%; height:100%;
+  background:var(--lavender-50);
+  padding:70px 22px 22px;
+  box-shadow:-8px 0 30px rgba(0,0,0,0.25);
+  display:flex; flex-direction:column; gap:10px;
+}
+#menu-panel h3{ color:var(--lavender-700); font-size:14px; margin-bottom:6px; }
+.menu-link{
+  display:block; text-align:left;
+  background:var(--lavender-100);
+  border:1px solid var(--lavender-300);
+  border-radius:var(--radius-md);
+  padding:14px 16px;
+  color:var(--plum-900);
+  font-size:15px; font-weight:600;
+  cursor:pointer;
+}
+.lang-row{ display:flex; gap:8px; margin-top:6px; }
+.lang-btn{
+  flex:1; padding:10px 0; border-radius:var(--radius-md);
+  border:1px solid var(--lavender-300); background:#fff;
+  font-weight:600; color:var(--lavender-700); cursor:pointer;
+}
+.lang-btn.active{ background:var(--lavender-500); color:#fff; }
+#menu-close{
+  align-self:flex-end; margin-bottom:10px;
+  width:36px; height:36px; border-radius:50%;
+  background:var(--lavender-100); border:none;
+  font-size:18px; color:var(--lavender-700); cursor:pointer;
+}
+
+/* ---------- หน้า Welcome ---------- */
+#tap-hint{
+  position:absolute; top:64px; left:50%; transform:translateX(-50%);
+  z-index:40;
+  color:#fff; font-size:14px; font-weight:600;
+  text-shadow:0 2px 10px rgba(0,0,0,.35);
+  background:rgba(163,117,214,0.55);
+  padding:6px 16px; border-radius:999px;
+  animation:pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{transform:translateX(-50%) scale(1);} 50%{transform:translateX(-50%) scale(1.06);} }
+
+#welcome-popup{
+  position:absolute; z-index:50;
+  width:78%; max-width:320px;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+  opacity:0; transform:scale(.7);
+  pointer-events:none;
+  transition: opacity .45s cubic-bezier(.34,1.56,.64,1), transform .45s cubic-bezier(.34,1.56,.64,1);
+}
+#welcome-popup.show{ opacity:1; transform:scale(1); pointer-events:auto; }
+#welcome-popup img{ width:100%; display:block; }
+
+/* ---------- หน้าปุ่มเค้ก ---------- */
+#cake-btn{
+  position:absolute; z-index:40;
+  width:48%; max-width:230px;
+  top:44%; left:50%;
+  transform:translate(-50%,-50%);
+  cursor:pointer;
+  filter:drop-shadow(0 18px 25px rgba(74,50,102,.45));
+  animation:float-bob 3.2s ease-in-out infinite;
+}
+#cake-btn img{ width:100%; display:block; }
+@keyframes float-bob{
+  0%,100%{ transform:translate(-50%,-50%) translateY(0); }
+  50%{ transform:translate(-50%,-50%) translateY(-14px); }
+}
+
+/* ---------- หน้าจดหมาย ---------- */
+#letter-content{
+  position:relative; z-index:30;
+  width:78%; max-height:62%;
+  overflow-y:auto;
+  margin-top:10px;
+  padding:14px 6px;
+  font-size:14px; line-height:1.9;
+  color:var(--plum-900);
+  text-align:left;
+  white-space:pre-line;
+}
+#letter-next{
+  position:absolute; right:18px; bottom:26px; z-index:40;
+  display:flex; align-items:center; gap:6px;
+  background:var(--lavender-500); color:#fff;
+  padding:10px 16px; border-radius:999px;
+  font-size:13px; font-weight:600;
+  box-shadow:var(--shadow-soft);
+  cursor:pointer;
+}
+#letter-next .arrow{ font-size:16px; }
+
+/* ---------- หน้าอัลบั้ม (Masonry) ---------- */
+#album-scroll{
+  width:100%; height:100%;
+  overflow-y:auto;
+  padding:70px 12px 90px;
+}
+#masonry{
+  column-count:2;
+  column-gap:12px;
+}
+.album-card{
+  break-inside:avoid;
+  margin-bottom:12px;
+  background:#fff;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  box-shadow:0 10px 24px rgba(74,50,102,.22);
+  cursor:pointer;
+}
+.album-card img{ width:100%; display:block; }
+.album-card .caption{
+  font-size:12px; padding:8px 10px;
+  color:var(--lavender-700); font-weight:600;
+}
+@supports (grid-template-rows: masonry){
+  #masonry{ display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:masonry; column-count:unset; gap:12px; }
+}
+
+#album-next{
+  position:absolute; right:18px; bottom:20px; z-index:40;
+  background:var(--lavender-500); color:#fff;
+  padding:12px 18px; border-radius:999px;
+  font-size:13px; font-weight:600;
+  box-shadow:var(--shadow-soft);
+  cursor:pointer;
+}
+
+/* ---------- Modal รูปภาพขยาย ---------- */
+#image-modal{
+  position:absolute; inset:0; z-index:90;
+  background:rgba(74,50,102,0.75);
+  display:none; align-items:center; justify-content:center;
+  padding:24px;
+}
+#image-modal.open{ display:flex; }
+#image-modal .modal-box{
+  background:#fff; border-radius:var(--radius-lg);
+  overflow:hidden; max-width:92%; max-height:88%;
+  display:flex; flex-direction:column;
+}
+#image-modal img{ width:100%; max-height:60vh; object-fit:cover; }
+#image-modal .modal-caption{
+  padding:14px 16px; font-size:13px; line-height:1.7; color:var(--plum-900);
+}
+#image-modal .modal-actions{
+  display:flex; gap:8px; padding:0 16px 16px;
+}
+#image-modal button{
+  flex:1; padding:10px; border-radius:var(--radius-md); border:none;
+  font-weight:600; cursor:pointer;
+}
+.btn-save{ background:var(--lavender-500); color:#fff; }
+.btn-close{ background:var(--lavender-100); color:var(--lavender-700); }
+
+/* ---------- หน้าปิดท้าย ---------- */
+#end-content{
+  position:relative; z-index:30;
+  width:80%; max-height:60%;
+  overflow-y:auto;
+  padding:16px 10px;
+  font-size:14px; line-height:1.9;
+  color:#fff;
+  text-shadow:0 2px 12px rgba(0,0,0,.4);
+  text-align:center;
+  white-space:pre-line;
+}
+#end-home{
+  position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+  z-index:40;
+  background:var(--lavender-500); color:#fff;
+  padding:12px 26px; border-radius:999px;
+  font-size:13px; font-weight:600;
+  box-shadow:var(--shadow-soft);
+  cursor:pointer;
+}
+
+/* ---------- หัวใจลอย (ใช้ร่วมกันทุกหน้า) ---------- */
+.floating-heart{
+  position:absolute; z-index:95;
+  font-size:22px;
+  pointer-events:none;
+  animation: heart-rise 2.4s ease-out forwards;
+}
+@keyframes heart-rise{
+  0%{ opacity:0; transform:translateY(0) scale(.6) rotate(0deg); }
+  15%{ opacity:1; }
+  100%{ opacity:0; transform:translateY(-260px) scale(1.1) rotate(20deg); }
+}
+
+/* ---------- ล็อกแนวตั้ง: เตือนเมื่อหมุนจอ ---------- */
+#rotate-overlay{
+  display:none;
+  position:fixed; inset:0; z-index:999;
+  background:var(--plum-900); color:#fff;
+  align-items:center; justify-content:center;
+  text-align:center; padding:30px;
+  font-size:16px;
+}
+@media (orientation: landscape) and (max-height: 500px){
+  #rotate-overlay{ display:flex; }
+}
+
+/* scrollbar เบาๆ */
+::-webkit-scrollbar{ width:5px; }
+::-webkit-scrollbar-thumb{ background:var(--lavender-300); border-radius:10px; }

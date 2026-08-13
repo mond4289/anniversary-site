@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>จัดการรูปภาพอัลบั้ม</title>
+<style>
+  body{ font-family:'Poppins',sans-serif; background:#F7F1FC; color:#4A3266; max-width:520px; margin:0 auto; padding:20px 16px 80px; }
+  h1{ font-size:20px; color:#6E4A97; margin-bottom:4px; }
+  p.hint{ font-size:13px; color:#7a6394; margin-bottom:20px; }
+  .card{ background:#fff; border:1px solid #CDA8EA; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 6px 18px rgba(110,74,151,.12); }
+  label{ display:block; font-size:13px; font-weight:600; margin:10px 0 4px; }
+  input[type=text], textarea{ width:100%; padding:10px; border-radius:10px; border:1px solid #CDA8EA; font-family:inherit; font-size:14px; }
+  textarea{ min-height:60px; resize:vertical; }
+  input[type=file]{ margin-top:4px; }
+  button{ cursor:pointer; border:none; border-radius:999px; font-weight:600; padding:10px 18px; font-size:14px; }
+  .btn-add{ background:#A375D6; color:#fff; margin-top:12px; }
+  .btn-del{ background:#f3d3dc; color:#a3455a; padding:6px 12px; font-size:12px; }
+  .btn-export{ background:#6E4A97; color:#fff; width:100%; margin-top:10px; }
+  .thumb{ width:100%; border-radius:10px; margin-bottom:8px; }
+  .item-row{ display:flex; justify-content:space-between; align-items:center; margin-top:8px; }
+  #export-box{ width:100%; min-height:160px; margin-top:10px; font-family:monospace; font-size:11px; }
+  .list-item{ border-top:1px dashed #CDA8EA; padding-top:12px; margin-top:12px; }
+</style>
+</head>
+<body>
+
+<h1>📸 จัดการรูปภาพอัลบั้ม</h1>
+<p class="hint">
+  หน้านี้ใช้สำหรับตัวคุณเองในการเพิ่ม/แก้ไข/ลบรูปในอัลบั้ม (หน้า 4 ของเว็บ)<br>
+  ⚠️ ข้อมูลที่เพิ่มที่นี่จะถูกเก็บไว้ใน "เบราว์เซอร์นี้เท่านั้น" — ถ้าต้องการให้รูปแสดงผลกับทุกคนที่เปิดเว็บ (เช่นแฟนคุณ)
+  ให้กด "คัดลอกโค้ด" ด้านล่างสุด แล้วนำไปวางแทนไฟล์ <code>js/album-data.js</code> ก่อนอัปโหลดเว็บขึ้นโฮสต์จริง
+</p>
+
+<div class="card">
+  <label>เลือกรูปภาพ</label>
+  <input type="file" id="file-input" accept="image/*">
+  <img id="preview" class="thumb" style="display:none;">
+
+  <label>ชื่อรูป (คำสั้นๆ ที่แสดงในกริด)</label>
+  <input type="text" id="input-caption" placeholder="เช่น ไปเที่ยวทะเล">
+
+  <label>รายละเอียด / ความรู้สึก (แสดงตอนคลิกดูรูปใหญ่)</label>
+  <textarea id="input-detail" placeholder="เขียนความรู้สึกหรือเรื่องราวของรูปนี้..."></textarea>
+
+  <button class="btn-add" id="btn-add">➕ เพิ่มรูปนี้เข้าอัลบั้ม</button>
+</div>
+
+<h2 style="font-size:16px; color:#6E4A97;">รายการรูปในอัลบั้ม (<span id="count">0</span>)</h2>
+<div id="list"></div>
+
+<div class="card">
+  <strong>ส่งออกโค้ด</strong>
+  <p class="hint" style="margin:6px 0;">กดปุ่มด้านล่างเพื่อสร้างโค้ดของ album-data.js ทั้งหมด แล้วคัดลอกไปวางแทนไฟล์เดิม</p>
+  <button class="btn-export" id="btn-export">📋 สร้าง & คัดลอกโค้ด</button>
+  <textarea id="export-box" readonly></textarea>
+</div>
+
+<script>
+let items = JSON.parse(localStorage.getItem('album_data') || '[]');
+let currentImageData = null;
+
+const fileInput = document.getElementById('file-input');
+const preview = document.getElementById('preview');
+
+fileInput.addEventListener('change', ()=>{
+  const file = fileInput.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    currentImageData = e.target.result; // base64 data URL
+    preview.src = currentImageData;
+    preview.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('btn-add').addEventListener('click', ()=>{
+  const caption = document.getElementById('input-caption').value.trim();
+  const detail = document.getElementById('input-detail').value.trim();
+  if(!currentImageData){ alert('กรุณาเลือกรูปภาพก่อน'); return; }
+  if(!caption){ alert('กรุณาใส่ชื่อรูป'); return; }
+
+  items.push({ img: currentImageData, caption, detail });
+  save();
+  render();
+
+  // เคลียร์ฟอร์ม
+  fileInput.value = '';
+  document.getElementById('input-caption').value = '';
+  document.getElementById('input-detail').value = '';
+  preview.style.display = 'none';
+  currentImageData = null;
+});
+
+function removeItem(idx){
+  if(!confirm('ลบรูปนี้ออกจากอัลบั้มหรือไม่?')) return;
+  items.splice(idx,1);
+  save();
+  render();
+}
+
+function save(){
+  localStorage.setItem('album_data', JSON.stringify(items));
+}
+
+function render(){
+  const list = document.getElementById('list');
+  document.getElementById('count').textContent = items.length;
+  list.innerHTML = '';
+  items.forEach((item, idx)=>{
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    div.innerHTML = `
+      <img src="${item.img}" class="thumb" style="max-height:140px; object-fit:cover;">
+      <div class="item-row">
+        <strong>${item.caption}</strong>
+        <button class="btn-del" onclick="removeItem(${idx})">ลบ</button>
+      </div>
+      <div style="font-size:12px; color:#7a6394; margin-top:4px;">${item.detail || ''}</div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+document.getElementById('btn-export').addEventListener('click', ()=>{
+  let code = "const defaultAlbumData = [\n";
+  items.forEach(item=>{
+    code += `  {\n    img: ${JSON.stringify(item.img)},\n    caption: ${JSON.stringify(item.caption)},\n    detail: ${JSON.stringify(item.detail)}\n  },\n`;
+  });
+  code += "];\n";
+  const box = document.getElementById('export-box');
+  box.value = code;
+  box.select();
+  document.execCommand('copy');
+  alert('คัดลอกโค้ดแล้ว! นำไปวางแทนเนื้อหาในไฟล์ js/album-data.js');
+});
+
+render();
+</script>
+</body>
+</html>

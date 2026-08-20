@@ -201,7 +201,7 @@ html,body{
 #letter-next{
   position:absolute; right:18px; bottom:56px; z-index:40;
   display:flex; align-items:center; gap:6px;
-  background:var(--lavender-500); color:#fff;
+  background:var(--lavender-500); color:#4A3266;
   padding:10px 16px; border-radius:999px;
   font-size:13px; font-weight:600;
   box-shadow:var(--shadow-soft);
@@ -317,7 +317,7 @@ html,body{
 #rotate-overlay{
   display:none;
   position:fixed; inset:0; z-index:999;
-  background:var(--plum-900); color:#fff;
+  background:var(--plum-900); color:#4A3266;
   align-items:center; justify-content:center;
   text-align:center; padding:30px;
   font-size:16px;

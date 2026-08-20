@@ -116,4 +116,39 @@ This one was captured on August 2, 2026... Do you remember this breathtaking wat
     caption: `ຄົນຂີ້ຫງຸດຫງິດ ກັບຄົນກວນຕີນ`,
     detail: `💕`
   },
+{
+    img: "images/album/M (13).jpg",
+    caption: `ໜ້າໂຫດປານໂກດໃຜ`,
+    detail: `ເຖີງຊິໂຫດແຕ່ໂກດບໍ່ລົງ`
+    },
+{
+    img: "images/album/M (17).jpg",
+    caption: `ຄັນໄດ້ຜິດໃຈໃດ`,
+    detail: `😒😘`
+  },
+{
+    img: "images/album/M (20).jpg",
+    caption: `ໄປຫລີ້ນລະເພີ່ນບໍຄອບ`,
+    detail: `ໄປຫລີ້ນລະເພີ່ນບໍ່ບອກ ສົງໃສຈະຮູ້ສືກຜິດ`
+  },
+{
+    img: "images/album/M (21).jpg",
+    caption: `ຈຸເມັງ`,
+    detail: `ຈະວ່າໄປແບບນີ້ກໍໜ້າຮັກນາາາາາາາາາາາາ`
+  },
+{
+    img: "images/album/M (22).jpg",
+    caption: `ເດັກນ້ອຍເມົາຄ້າງ`,
+    detail: `ເຖີງຈະເມົງຄ້າງ ແຕ່ຍັງໜ້າຮັກເຫັນໄດ້ຊັດໆ`
+  },
+{
+    img: "images/album/M (23).jpg",
+    caption: `ເພີ່ນວ່າເພີ່ນບໍ່ເມົາ`,
+    detail: `ສະພາບຄົນບໍເມົາແຕ່ຍັງກັບເມືອຮອດເຮືອນ ຍັງສາມາດຖ່າຍຮູບມາໃຫ້ເບີ່ງໄດ້ສະແດງວ່າບໍ່ເມົາ`
+  },
+{
+    img: "images/album/M (24).jpg",
+    caption: `ບໍ່ຮູ້ວ່າຈະທັກຫຍັງ`,
+    detail: `ຢາກທັກໄປຫາໃຈຈິຂາດ ແຕ່ບໍ່ຮູ້ວ່າຈະເລີ່ມຈາກໃສ ເລີຍຊອກຫາແນວທັກໄປ ທັກໄປລະບໍ່ຕອບ 😒😒😒😒 `
+  },
 ];

@@ -132,7 +132,7 @@ This one was captured on August 2, 2026... Do you remember this breathtaking wat
     detail: `ໄປຫລີ້ນລະເພີ່ນບໍ່ບອກ ສົງໃສຈະຮູ້ສືກຜິດ`
   },
 {
-    img: "images/album/M (21).jpg",
+    img: "images/album/M (21).png",
     caption: `ຈຸເມັງ`,
     detail: `ຈະວ່າໄປແບບນີ້ກໍໜ້າຮັກນາາາາາາາາາາາາ`
   },

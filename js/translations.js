@@ -27,7 +27,7 @@ const translations = {
     menuLanguage: "ພາສາ",                 // หัวข้อเลือกภาษา
 
     // ตัวนับเวลาคบกัน (Real-time counter)
-    counterTitle: "ຮັກກັນມາແລ້ວ",         // หัวข้อ "รักกันมาแล้ว..."
+    counterTitle: "ຄົບກັນມາແລ້ວ",         // หัวข้อ "คบกันมาแล้ว..."
     counterDays: "ມື້",                    // วัน
     counterHours: "ຊົ່ວໂມງ",               // ชั่วโมง
     counterMinutes: "ນາທີ",                // นาที
@@ -51,7 +51,7 @@ const translations = {
     menuAlbumPage: "หน้ารูปภาพ",
     menuLanguage: "ภาษา",
 
-    counterTitle: "รักกันมาแล้ว",
+    counterTitle: "คบกันมาแล้ว",
     counterDays: "วัน",
     counterHours: "ชั่วโมง",
     counterMinutes: "นาที",

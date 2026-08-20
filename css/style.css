@@ -199,7 +199,7 @@ html,body{
   white-space:pre-line;
 }
 #letter-next{
-  position:absolute; right:18px; bottom:26px; z-index:40;
+  position:absolute; right:18px; bottom:56px; z-index:40;
   display:flex; align-items:center; gap:6px;
   background:var(--lavender-500); color:#fff;
   padding:10px 16px; border-radius:999px;
@@ -238,7 +238,7 @@ html,body{
 }
 
 #album-next{
-  position:absolute; right:18px; bottom:20px; z-index:40;
+  position:absolute; right:18px; bottom:52px; z-index:40;
   background:var(--lavender-500); color:#fff;
   padding:12px 18px; border-radius:999px;
   font-size:13px; font-weight:600;
@@ -262,6 +262,8 @@ html,body{
 #image-modal img{ width:100%; max-height:60vh; object-fit:cover; }
 #image-modal .modal-caption{
   padding:14px 16px; font-size:13px; line-height:1.7; color:var(--plum-900);
+  max-height:32vh;
+  overflow-y:auto;
 }
 #image-modal .modal-actions{
   display:flex; gap:8px; padding:0 16px 16px;
@@ -286,7 +288,7 @@ html,body{
   white-space:pre-line;
 }
 #end-home{
-  position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+  position:absolute; bottom:46px; left:50%; transform:translateX(-50%);
   z-index:40;
   background:var(--lavender-500); color:#fff;
   padding:12px 26px; border-radius:999px;

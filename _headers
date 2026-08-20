@@ -1,0 +1,15 @@
+# ไฟล์นี้ใช้เฉพาะตอนโฮสต์บน Cloudflare Pages (และ Netlify ก็รองรับรูปแบบนี้เหมือนกัน)
+# บอกเบราว์เซอร์ให้ "แคช" ไฟล์รูปภาพและเพลงไว้ ทำให้เว็บโหลดเร็วขึ้นในการเข้าครั้งถัดไป
+# ไม่ต้องแก้ไขไฟล์นี้ครับ วางไว้เฉยๆ พอ
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/music/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=86400
+
+/js/*
+  Cache-Control: public, max-age=86400
